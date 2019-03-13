@@ -38,7 +38,15 @@ public class CRMLoggingAspect {
 		String theMethod =  theJoinPoint.getSignature().toShortString();
 		myLogger.info("====> in @Before: calling method " + theMethod);
 		
-		//
+		//DISPLAY ARGUMENTS
+		Object[] args = theJoinPoint.getArgs();
+		
+		//GET ARGUMENTS
+		for(Object tempArg : args) {
+			myLogger.info("====> argument: " + tempArg);
+		}
+		
+		//LOOP
 		
 		
 	}
