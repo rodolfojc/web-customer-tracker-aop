@@ -2,7 +2,9 @@ package com.springdemo.aspect;
 
 import java.util.logging.Logger;
 
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
@@ -16,20 +18,36 @@ public class CRMLoggingAspect {
 	private Logger myLogger = Logger.getLogger(getClass().getName());
 	
 	//SETUD POINTCUT DECLARATION
-	@Pointcut("execution(* com.springdemo.controller.*.*.(..))")
+	@Pointcut("execution(* com.springdemo.controller.*.*(..))")
 	private void forControllerPackage() {}
 	
-	@Pointcut("execution(* com.springdemo.service.*.*.(..))")
+	@Pointcut("execution(* com.springdemo.service.*.*(..))")
 	private void forServicePackage() {}
 	
-	@Pointcut("execution(* com.springdemo.dao.*.*.(..))")
+	@Pointcut("execution(* com.springdemo.dao.*.*(..))")
 	private void forDaoPackage() {}
 	
 	@Pointcut("forControllerPackage() || forServicePackage() || forDaoPackage() ")
 	private void forAppFlow() {}
 	
-	
 	//@BEFORE
+	@Before("forAppFlow()")
+	public void before(JoinPoint theJoinPoint) {
+		
+		//DISCPLAY THE METHOD - CALLING
+		String theMethod =  theJoinPoint.getSignature().toShortString();
+		myLogger.info("====> in @Before: calling method " + theMethod);
+		
+		//
+		
+		
+	}
+	
+	
+	
+	
+	
+	
 	
 	//@AFTERRETUNING
 	
